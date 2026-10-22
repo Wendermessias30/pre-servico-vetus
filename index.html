@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>📋 Prestação de Serviço — Vétus Gestão de Acesso</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <img
+          src="image/logo-vetus.png"
+          alt="Vétus Gestão de Acesso"
+          class="logo"
+        />
+        <h1>📋 Proposta de Prestação de Serviço</h1>
+        <p>Vétus Gestão de Acesso</p>
+      </header>
+
+      <div class="tela">
+        <div class="section">
+          <h2>Dados do Cliente</h2>
+
+          <label for="pre-nome">Nome Completo *</label>
+          <input
+            type="text"
+            id="pre-nome"
+            placeholder="Seu nome completo"
+            required
+          />
+          <div id="pre-nome-erro" class="erro"></div>
+
+          <label for="pre-cpf">CPF *</label>
+          <input
+            type="text"
+            id="pre-cpf"
+            placeholder="___.___.___-__"
+            maxlength="14"
+            required
+          />
+          <div id="pre-cpf-erro" class="erro"></div>
+
+          <label for="pre-whats">WhatsApp *</label>
+          <input
+            type="text"
+            id="pre-whats"
+            placeholder="(XX) XXXXX-XXXX"
+            maxlength="16"
+            required
+          />
+          <div id="pre-whats-erro" class="erro"></div>
+
+          <label for="pre-email">E-mail *</label>
+          <input
+            type="email"
+            id="pre-email"
+            placeholder="seu@email.com"
+            required
+          />
+          <div id="pre-email-erro" class="erro"></div>
+
+          <label for="pre-pacote">Escolha o Pacote *</label>
+          <select id="pre-pacote">
+            <option value="">Selecione...</option>
+            <option value="Pacote Básico|45.00">
+              Pacote Básico — R$ 45,00/mês
+            </option>
+            <option value="Pacote Completo|80.00">
+              Pacote Completo — R$ 80,00/mês
+            </option>
+            <option value="Pacote Premium|130.00">
+              Pacote Premium — R$ 130,00/mês
+            </option>
+            <option value="Serviço Avulso|35.00">
+              Serviço Avulso — R$ 35,00
+            </option>
+          </select>
+          <div id="pre-pacote-erro" class="erro"></div>
+
+          <!-- ✅ NOVO CAMPO -->
+          <label for="pre-necessidade"
+            >Qual a sua necessidade e como a Vétus pode ajudar?</label
+          >
+          <textarea
+            id="pre-necessidade"
+            placeholder="Descreva o que precisa, por exemplo: recuperar conta de e-mail, organizar senhas, proteger redes sociais..."
+            rows="4"
+          ></textarea>
+          <div id="pre-necessidade-erro" class="erro"></div>
+        </div>
+
+        <div class="section">
+          <h2>Termo de Consentimento</h2>
+          <div class="termo">
+            <p>
+              Ao enviar esta proposta, concordo com os termos de prestação de
+              serviços da <strong>Vétus Gestão de Acesso</strong>, autorizando o
+              contato via WhatsApp e e-mail para tratamento comercial, conforme
+              a Lei Geral de Proteção de Dados (LGPD — Lei nº 13.718/2018).
+            </p>
+            <p>
+              Declaro que os dados informados são verdadeiros e estou ciente dos
+              valores e condições do pacote escolhido.
+            </p>
+          </div>
+
+          <label class="checkbox-label">
+            <input type="checkbox" id="pre-concordo" />
+            Li e concordo com os termos acima *
+          </label>
+          <div id="pre-concordo-erro" class="erro"></div>
+        </div>
+
+        <button class="btn-whats" id="btn-enviar-whats">
+          💬 Enviar Proposta pelo WhatsApp
+        </button>
+
+        <p class="aviso">
+          ⚠️ Você será direcionado ao WhatsApp com a mensagem pronta, é só
+          enviar!
+        </p>
+      </div>
+    </div>
+
+    <script src="js/app.js"></script>
+  </body>
+</html>
