@@ -1,5 +1,5 @@
 // ==================================================
-// VÉTUS — PROPOSTA COM VALIDAÇÃO DE CPF AJUSTADA
+// VÉTUS — VALIDAÇÃO DE CPF CORRIGIDA E UNIVERSAL
 // ==================================================
 
 const WHATSAPP_VETUS = "5534998242733";
@@ -33,43 +33,37 @@ function validarFormatoCPF(cpf) {
   return /^\d{3}\.\d{3}\.\d{3}-\d{2}$/.test(cpf);
 }
 
-// ✅ VALIDAÇÃO ATUALIZADA — compatível com a Receita Federal
+// ✅ VALIDAÇÃO PADRÃO OFICIAL DA RECEITA FEDERAL
 function validarCPFCompleto(cpf) {
   const numeros = cpf.replace(/\D/g, "");
 
-  // Tem que ter 11 dígitos
+  // Tem que ter exatamente 11 dígitos
   if (numeros.length !== 11) return false;
 
-  // Rejeita sequências iguais (ex: 111.111.111-11)
+  // Rejeita sequências repetidas (ex: 111.111.111-11)
   if (/^(\d)\1+$/.test(numeros)) return false;
 
-  // Lista de CPFs conhecidos válidos que passam na Receita
-  const cpfConhecidosValidos = [
-    "16753253670", // ✅ O seu!
-  ];
-  if (cpfConhecidosValidos.includes(numeros)) return true;
-
-  // Cálculo padrão da Receita Federal
   const digitos = numeros.split("").map(Number);
 
-  // Primeiro dígito verificador
+  // ========== PRIMEIRO DÍGITO VERIFICADOR ==========
   let soma1 = 0;
   for (let i = 0; i < 9; i++) {
     soma1 += digitos[i] * (10 - i);
   }
-  const dv1 = (soma1 * 10) % 11;
-  const dv1Final = dv1 < 2 ? 0 : 11 - dv1;
-  if (dv1Final !== digitos[9]) return false;
+  let resto1 = (soma1 * 10) % 11;
+  if (resto1 === 10 || resto1 === 11) resto1 = 0;
+  if (resto1 !== digitos[9]) return false;
 
-  // Segundo dígito verificador
+  // ========== SEGUNDO DÍGITO VERIFICADOR ==========
   let soma2 = 0;
   for (let i = 0; i < 10; i++) {
     soma2 += digitos[i] * (11 - i);
   }
-  const dv2 = (soma2 * 10) % 11;
-  const dv2Final = dv2 < 2 ? 0 : 11 - dv2;
-  if (dv2Final !== digitos[10]) return false;
+  let resto2 = (soma2 * 10) % 11;
+  if (resto2 === 10 || resto2 === 11) resto2 = 0;
+  if (resto2 !== digitos[10]) return false;
 
+  // ✅ Tudo certo!
   return true;
 }
 
@@ -107,7 +101,7 @@ document.getElementById("pre-cpf").addEventListener("input", function () {
   } else if (!validarFormatoCPF(this.value)) {
     mostrarErro("pre-cpf", "pre-cpf-erro", "Formato: 000.000.000-00");
   } else if (!validarCPFCompleto(this.value)) {
-    mostrarErro("pre-cpf", "pre-cpf-erro", "Confira os números do CPF");
+    mostrarErro("pre-cpf", "pre-cpf-erro", "CPF inválido — confira os números");
   } else {
     mostrarErro("pre-cpf", "pre-cpf-erro", "");
   }
